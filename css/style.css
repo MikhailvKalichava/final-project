@@ -12,7 +12,12 @@
 /* ===== login page ===== */
 
 /* ===== main ===== */
-
+.home-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  text-align: center;
+}
 /* ===== form ===== */
 
 /* ===== results grid — use CSS Grid here ===== */
