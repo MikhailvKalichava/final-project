@@ -3,32 +3,59 @@
   /* colour palette and spacing variables */
 }
 
-/* ===== reset ===== */
 
-/* ===== header ===== */
-
-/* ===== nav — use Flexbox here ===== */
-
-/* ===== login page ===== */
-
-/* ===== main ===== */
 .home-main {
   max-width: 900px;
   margin: 0 auto;
   padding: 32px 16px;
+}
+
+.home-intro,
+.anime-section h2 {
   text-align: center;
 }
-/* ===== form ===== */
 
-/* ===== results grid — use CSS Grid here ===== */
+.anime-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
 
-/* ===== card ===== */
+.anime-card {
+  display: grid;
+  grid-template-columns: 90px 1fr 180px;
+  gap: 12px;
+  align-items: start;
+  padding: 12px;
+}
 
-/* ===== saved grid — use CSS Grid here ===== */
+.anime-card__image {
+  width: 90px;
+  height: 120px;
+  object-fit: cover;
+}
 
-/* ===== loading & error states ===== */
+.anime-card__title {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
 
-/* ===== footer ===== */
+.anime-card__description summary {
+  cursor: pointer;
+}
+
+.anime-card__description p {
+  margin-bottom: 0;
+}
+
+.anime-card__categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+
 
 /* ===== responsive ===== */
 @media (max-width: 600px) {
