@@ -55,6 +55,46 @@
   justify-content: flex-end;
 }
 
+.account-main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+.account-section {
+  text-align: center;
+}
+
+.account-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+  text-align: left;
+}
+
+.account-form__row {
+  display: grid;
+  gap: 6px;
+}
+
+.account-form__row input {
+  padding: 8px;
+}
+
+.account-form__message {
+  margin: 0;
+}
+
+.account-form__message--error {
+  font-weight: bold;
+}
+
+
+
+
+
+
+
 
 
 /* ===== responsive ===== */
