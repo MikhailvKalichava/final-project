@@ -3,37 +3,137 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saved — Project Name</title>
+  <title>Anime List — Saved Anime</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <header>
-    <nav>
-      <span class="nav__logo">Project Name</span>
-      <div class="nav__links">
-        <a href="index.html">Search</a>
-        <a href="saved.html">Saved</a>
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main navigation">
+      <span class="site-nav__logo">AnimeShelf</span>
+
+      <div class="site-nav__links">
+        <a href="index.html">Home</a>
+        <a href="saved.html" aria-current="page">Saved Anime</a>
+        <a href="#">Test Page</a>
+        <a href="#">About</a>
       </div>
-      <div class="nav__actions">
+
+      <div class="site-nav__actions">
         <span id="nav-user"></span>
-        <button id="logout-btn" type="button">Logout</button>
+        <a href="login.html" id="login-link">Account</a>
+        <button id="logout-btn" type="button" hidden>Logout</button>
       </div>
     </nav>
   </header>
 
-  <main>
-
-    <section>
-      <h2>Saved Items</h2>
-      <p id="saved-empty" hidden>Nothing saved yet.</p>
-      <div id="saved-grid"></div>
+  <main class="saved-main">
+    <section class="saved-intro" aria-labelledby="saved-title">
+      <h1 id="saved-title">Saved Anime</h1>
+      <p>Manage the anime titles saved in your account and update your personal watch status.</p>
     </section>
 
+    <section class="saved-section" aria-labelledby="saved-list-title">
+      <h2 id="saved-list-title">My List</h2>
+
+      <div id="saved-grid" class="saved-grid">
+        <article class="saved-card" data-anime-id="naruto">
+          <img class="saved-card__image" src="assets/box.png" alt="Placeholder image for Naruto">
+
+          <div class="saved-card__content">
+            <h3 class="saved-card__title">Naruto</h3>
+            <details class="saved-card__description">
+              <summary>Description</summary>
+              <p>WIP</p>
+            </details>
+          </div>
+
+          <div class="saved-card__meta">
+            <div class="saved-card__categories" aria-label="Anime categories">
+              <span>Action</span>
+              <span>Adventure</span>
+              <span>Shonen</span>
+            </div>
+
+            <label class="saved-card__status-label">
+              Status
+              <select class="saved-card__status" name="naruto-status">
+                <option value="Watching" selected>Watching</option>
+                <option value="Plan to Watch">Plan to Watch</option>
+                <option value="Completed">Completed</option>
+                <option value="On Hold">On Hold</option>
+                <option value="Dropped">Dropped</option>
+              </select>
+            </label>
+          </div>
+        </article>
+
+        <article class="saved-card" data-anime-id="spy-family">
+          <img class="saved-card__image" src="assets/box.png" alt="Placeholder image for Spy x Family">
+
+          <div class="saved-card__content">
+            <h3 class="saved-card__title">Spy x Family</h3>
+            <details class="saved-card__description">
+              <summary>Description</summary>
+              <p>WIP</p>
+            </details>
+          </div>
+
+          <div class="saved-card__meta">
+            <div class="saved-card__categories" aria-label="Anime categories">
+              <span>Comedy</span>
+              <span>Action</span>
+              <span>Slice of Life</span>
+            </div>
+
+            <label class="saved-card__status-label">
+              Status
+              <select class="saved-card__status" name="spy-family-status">
+                <option value="Watching">Watching</option>
+                <option value="Plan to Watch" selected>Plan to Watch</option>
+                <option value="Completed">Completed</option>
+                <option value="On Hold">On Hold</option>
+                <option value="Dropped">Dropped</option>
+              </select>
+            </label>
+          </div>
+        </article>
+
+        <article class="saved-card" data-anime-id="violet-evergarden">
+          <img class="saved-card__image" src="assets/box.png" alt="Placeholder image for Violet Evergarden">
+
+          <div class="saved-card__content">
+            <h3 class="saved-card__title">Violet Evergarden</h3>
+            <details class="saved-card__description">
+              <summary>Description</summary>
+              <p>WIP</p>
+            </details>
+          </div>
+
+          <div class="saved-card__meta">
+            <div class="saved-card__categories" aria-label="Anime categories">
+              <span>Drama</span>
+              <span>Fantasy</span>
+            </div>
+
+            <label class="saved-card__status-label">
+              Status
+              <select class="saved-card__status" name="violet-evergarden-status">
+                <option value="Watching">Watching</option>
+                <option value="Plan to Watch">Plan to Watch</option>
+                <option value="Completed" selected>Completed</option>
+                <option value="On Hold">On Hold</option>
+                <option value="Dropped">Dropped</option>
+              </select>
+            </label>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <!-- footer content -->
+  <footer class="site-footer">
+    <p>Anime List</p>
   </footer>
 
   <script type="module" src="js/saved.js"></script>
