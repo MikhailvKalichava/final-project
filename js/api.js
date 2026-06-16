@@ -64,11 +64,17 @@ function updateAnimeStatus(animeId, newStatus) {
   setSavedAnime(updatedAnime);
 }
 
+function removeAnime(animeId) {
+  const updatedAnime = getSavedAnime().filter(anime => anime.id !== animeId);
+  setSavedAnime(updatedAnime);
+}
+
 window.AnimeStorage = {
   fetchData,
   getSavedAnime,
   setSavedAnime,
   isAnimeSaved,
   saveAnime,
-  updateAnimeStatus
+  updateAnimeStatus,
+  removeAnime
 };

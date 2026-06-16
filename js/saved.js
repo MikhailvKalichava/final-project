@@ -63,6 +63,20 @@ function createStatusSelect(anime) {
   return label;
 }
 
+function createRemoveButton(anime) {
+  const removeButton = document.createElement('button');
+  removeButton.className = 'saved-card__remove-btn';
+  removeButton.type = 'button';
+  removeButton.textContent = 'Remove';
+
+  removeButton.addEventListener('click', () => {
+    window.AnimeStorage.removeAnime(anime.id);
+    renderSavedAnime();
+  });
+
+  return removeButton;
+}
+
 function createSavedCard(anime) {
   const card = document.createElement('article');
   card.className = 'saved-card';
@@ -98,6 +112,7 @@ function createSavedCard(anime) {
   meta.className = 'saved-card__meta';
   meta.appendChild(createCategoryTags(anime.categories));
   meta.appendChild(createStatusSelect(anime));
+  meta.appendChild(createRemoveButton(anime));
 
   card.appendChild(image);
   card.appendChild(content);

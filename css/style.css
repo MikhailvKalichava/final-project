@@ -1,4 +1,4 @@
-/* ===== custom properties ===== */
+
 :root {
   --color-page-bg: #1f1f1f;
   --color-surface: #2a2a2a;
@@ -300,6 +300,14 @@ button:disabled {
   font-weight: bold;
 }
 
+.saved-card__remove-btn {
+  width: fit-content;
+  justify-self: end;
+}
+
+.saved-card__remove-btn:hover {
+  border-color: var(--color-focus-border);
+}
 
 
 
