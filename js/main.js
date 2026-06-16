@@ -1,37 +1,75 @@
-import { fetchData, getSaved, setSaved } from './api.js';
+const currentUser = localStorage.getItem('user');
+const navUser = document.getElementById('nav-user');
+const loginLink = document.getElementById('login-link');
+const logoutBtn = document.getElementById('logout-btn');
+const saveButtons = document.querySelectorAll('.anime-card__save-btn');
 
-// redirect to login if no user session
-if (!localStorage.getItem('user')) {
-  window.location.href = 'login.html';
+function updateHeader() {
+  if (currentUser) {
+    navUser.textContent = `Hello, ${currentUser}`;
+    loginLink.hidden = true;
+    logoutBtn.hidden = false;
+  } else {
+    navUser.textContent = 'Guest';
+    loginLink.hidden = false;
+    logoutBtn.hidden = true;
+  }
 }
 
-document.getElementById('nav-user').textContent = localStorage.getItem('user') || '';
+function getAnimeFromCard(card) {
+  return {
+    id: card.dataset.animeId,
+    title: card.dataset.animeTitle,
+    description: card.dataset.animeDescription,
+    categories: card.dataset.animeCategories.split(',').map(category => category.trim()),
+    image: card.dataset.animeImage
+  };
+}
 
-document.getElementById('logout-btn').addEventListener('click', () => {
+function markButtonAsSaved(button) {
+  button.textContent = 'Saved';
+  button.disabled = true;
+}
+
+function updateSaveButtonStates() {
+  saveButtons.forEach(button => {
+    const card = button.closest('.anime-card');
+
+    if (window.AnimeStorage.isAnimeSaved(card.dataset.animeId)) {
+      markButtonAsSaved(button);
+    }
+  });
+}
+
+function showSaveMessage(card, message) {
+  const messageEl = card.querySelector('.anime-card__message');
+  messageEl.textContent = message;
+  messageEl.hidden = false;
+}
+
+function handleSaveButtons() {
+  saveButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const card = button.closest('.anime-card');
+      const anime = getAnimeFromCard(card);
+      const wasSaved = window.AnimeStorage.saveAnime(anime);
+
+      if (wasSaved) {
+        markButtonAsSaved(button);
+        showSaveMessage(card, 'Added to Saved Anime.');
+      } else {
+        showSaveMessage(card, 'This anime is already saved.');
+      }
+    });
+  });
+}
+
+logoutBtn.addEventListener('click', () => {
   localStorage.removeItem('user');
   document.cookie = 'authorized=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
   window.location.href = 'login.html';
 });
 
-// --- State ---
-// keep your application state as an array of objects
-let savedItems = getSaved();
-
-function showLoading() {}
-
-function showError(message) {}
-
-function renderResults(items) {
-  // create a card element for each item
-  // the click handler inside forEach closes over the item — this is your closure
-  items.forEach(item => {
-    const card = document.createElement('article');
-    // build and append card content here
-    document.getElementById('results-grid').appendChild(card);
-  });
-}
-
-document.getElementById('search-form').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  // validate, call fetchData, call showLoading/showError, call renderResults
-});
+updateHeader();
+updateSaveButtonStates();
+handleSaveButtons();

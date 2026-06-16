@@ -1,3 +1,4 @@
+/* ===== custom properties ===== */
 :root {
   --color-page-bg: #1f1f1f;
   --color-surface: #2a2a2a;
@@ -82,6 +83,10 @@ button {
 }
 
 
+button:disabled {
+  cursor: default;
+  opacity: 0.65;
+}
 
 .home-main,
 .saved-main {
@@ -143,11 +148,29 @@ button {
   color: var(--color-muted-text);
 }
 
+.anime-card__meta {
+  display: grid;
+  gap: 12px;
+  justify-items: end;
+
+}
+
 .anime-card__categories {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   justify-content: flex-end;
+}
+
+.anime-card__save-btn {
+  width: fit-content;
+}
+
+.anime-card__message {
+  margin: 0;
+  color: var(--color-muted-text);
+  font-size: 0.9rem;
+  text-align: right;
 }
 
 .anime-card__categories span,
@@ -160,6 +183,10 @@ button {
 
 
 
+.saved-empty {
+  text-align: center;
+  color: var(--color-muted-text);
+}
 
 .saved-grid {
   display: grid;
@@ -259,7 +286,8 @@ button {
 }
 
 .account-form__row input:focus,
-.saved-card__status:focus {
+.saved-card__status:focus,
+.anime-card__save-btn:focus {
   outline: none;
   border-color: var(--color-focus-border);
 }

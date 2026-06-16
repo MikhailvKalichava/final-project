@@ -28,12 +28,23 @@
 
   <main class="home-main">
     <section class="home-intro" aria-labelledby="home-title">
-      <h1 id="home-title">Anime Descriptions</h1>
-      <p>Explore anime and save your favorites to your account later.</p>
+      <h1 id="home-title">Anime Titles</h1>
+      <p>Explore anime titles and save your favorites to your account.</p>
     </section>
+
+    <section class="anime-section" aria-labelledby="anime-heading">
+      <h2 id="anime-heading">Featured Anime</h2>
+
       <div class="anime-list">
-        <article class="anime-card">
-          <img class="anime-card__image" src="assets/box.png" alt="Placeholder image for Attack on Titan">
+        <article
+          class="anime-card"
+          data-anime-id="attack-on-titan"
+          data-anime-title="Attack on Titan"
+          data-anime-description="WIP"
+          data-anime-categories="WIP"
+          data-anime-image="assets/anime-placeholder.png"
+        >
+          <img class="anime-card__image" src="assets/anime-placeholder.png" alt="Placeholder image for Attack on Titan">
 
           <div class="anime-card__content">
             <h3 class="anime-card__title">Attack on Titan</h3>
@@ -43,13 +54,25 @@
             </details>
           </div>
 
-          <div class="anime-card__categories" aria-label="Anime categories">
-            <span>WIP</span>
+          <div class="anime-card__meta">
+            <div class="anime-card__categories" aria-label="Anime categories">
+              <span>WIP</span>
+            </div>
+
+            <button class="anime-card__save-btn" type="button">Save</button>
+            <p class="anime-card__message" hidden></p>
           </div>
         </article>
 
-        <article class="anime-card">
-          <img class="anime-card__image" src="assets/box.png" alt="Placeholder image for Death Note">
+        <article
+          class="anime-card"
+          data-anime-id="fullmetal-alchemist"
+          data-anime-title="Fullmetal Alchemist: Brotherhood"
+          data-anime-description="WIP"
+          data-anime-categories="WIP"
+          data-anime-image="assets/anime-placeholder.png"
+        >
+          <img class="anime-card__image" src="assets/anime-placeholder.png" alt="Placeholder image for Fullmetal Alchemist: Brotherhood">
 
           <div class="anime-card__content">
             <h3 class="anime-card__title">Fullmetal Alchemist: Brotherhood</h3>
@@ -59,13 +82,25 @@
             </details>
           </div>
 
-          <div class="anime-card__categories" aria-label="Anime categories">
-            <span>WIP</span>
+          <div class="anime-card__meta">
+            <div class="anime-card__categories" aria-label="Anime categories">
+              <span>WIP</span>
+            </div>
+
+            <button class="anime-card__save-btn" type="button">Save</button>
+            <p class="anime-card__message" hidden></p>
           </div>
         </article>
 
-        <article class="anime-card">
-          <img class="anime-card__image" src="assets/box.png" alt="Placeholder image for Demon Slayer">
+        <article
+          class="anime-card"
+          data-anime-id="gurren-lagann"
+          data-anime-title="Gurren Lagann"
+          data-anime-description="WIP"
+          data-anime-categories="WIP"
+          data-anime-image="assets/anime-placeholder.png"
+        >
+          <img class="anime-card__image" src="assets/anime-placeholder.png" alt="Placeholder image for Gurren Lagann">
 
           <div class="anime-card__content">
             <h3 class="anime-card__title">Gurren Lagann</h3>
@@ -75,13 +110,25 @@
             </details>
           </div>
 
-          <div class="anime-card__categories" aria-label="Anime categories">
-            <span>WIP</span>
+          <div class="anime-card__meta">
+            <div class="anime-card__categories" aria-label="Anime categories">
+              <span>WIP</span>
+            </div>
+
+            <button class="anime-card__save-btn" type="button">Save</button>
+            <p class="anime-card__message" hidden></p>
           </div>
         </article>
 
-        <article class="anime-card">
-          <img class="anime-card__image" src="assets/box.png" alt="Placeholder image for Your Name">
+        <article
+          class="anime-card"
+          data-anime-id="hunter-x-unter"
+          data-anime-title="Hunter X Hunter"
+          data-anime-description="WIP"
+          data-anime-categories="WIP"
+          data-anime-image="assets/anime-placeholder.svg"
+        >
+          <img class="anime-card__image" src="assets/anime-placeholder.png" alt="Placeholder image for Hunter X Hunter">
 
           <div class="anime-card__content">
             <h3 class="anime-card__title">Hunter X Hunter</h3>
@@ -91,19 +138,25 @@
             </details>
           </div>
 
-          <div class="anime-card__categories" aria-label="Anime categories">
-            <span>WIP</span>
+          <div class="anime-card__meta">
+            <div class="anime-card__categories" aria-label="Anime categories">
+              <span>WIP</span>
+            </div>
+
+            <button class="anime-card__save-btn" type="button">Save</button>
+            <p class="anime-card__message" hidden></p>
           </div>
         </article>
       </div>
     </section>
   </main>
 
-
+  
   <footer class="site-footer">
-    <p>Anime List - project</p>
+    <p>Anime List project</p>
   </footer>
 
-  <script type="module" src="js/main.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

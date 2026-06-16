@@ -1,48 +1,133 @@
-import { getSaved, setSaved } from './api.js';
+const navUser = document.getElementById('nav-user');
+const loginLink = document.getElementById('login-link');
+const logoutBtn = document.getElementById('logout-btn');
+const savedGrid = document.getElementById('saved-grid');
+const savedEmpty = document.getElementById('saved-empty');
 
-// redirect to login if no user session
-if (!localStorage.getItem('user')) {
-  window.location.href = 'login.html';
+function updateHeader() {
+  const currentUser = localStorage.getItem('user');
+
+  if (currentUser) {
+    navUser.textContent = `Hello, ${currentUser}`;
+    loginLink.hidden = true;
+    logoutBtn.hidden = false;
+  } else {
+    navUser.textContent = 'Guest';
+    loginLink.hidden = false;
+    logoutBtn.hidden = true;
+  }
 }
 
-document.getElementById('nav-user').textContent = localStorage.getItem('user') || '';
+function createCategoryTags(categories) {
+  const categoryBox = document.createElement('div');
+  categoryBox.className = 'saved-card__categories';
+  categoryBox.setAttribute('aria-label', 'Anime categories');
 
-document.getElementById('logout-btn').addEventListener('click', () => {
+  categories.forEach(category => {
+    const tag = document.createElement('span');
+    tag.textContent = category;
+    categoryBox.appendChild(tag);
+  });
+
+  return categoryBox;
+}
+
+function createStatusSelect(anime) {
+  const label = document.createElement('label');
+  label.className = 'saved-card__status-label';
+  label.textContent = 'Status';
+
+  const select = document.createElement('select');
+  select.className = 'saved-card__status';
+  select.name = `${anime.id}-status`;
+
+  const statuses = ['Watching', 'Plan to Watch', 'Completed', 'On Hold', 'Dropped'];
+
+  statuses.forEach(status => {
+    const option = document.createElement('option');
+    option.value = status;
+    option.textContent = status;
+
+    if (anime.status === status) {
+      option.selected = true;
+    }
+
+    select.appendChild(option);
+  });
+
+  select.addEventListener('change', () => {
+    window.AnimeStorage.updateAnimeStatus(anime.id, select.value);
+  });
+
+  label.appendChild(select);
+  return label;
+}
+
+function createSavedCard(anime) {
+  const card = document.createElement('article');
+  card.className = 'saved-card';
+  card.dataset.animeId = anime.id;
+
+  const image = document.createElement('img');
+  image.className = 'saved-card__image';
+  image.src = anime.image;
+  image.alt = `Placeholder image for ${anime.title}`;
+
+  const content = document.createElement('div');
+  content.className = 'saved-card__content';
+
+  const title = document.createElement('h3');
+  title.className = 'saved-card__title';
+  title.textContent = anime.title;
+
+  const details = document.createElement('details');
+  details.className = 'saved-card__description';
+
+  const summary = document.createElement('summary');
+  summary.textContent = 'Description';
+
+  const description = document.createElement('p');
+  description.textContent = anime.description;
+
+  details.appendChild(summary);
+  details.appendChild(description);
+  content.appendChild(title);
+  content.appendChild(details);
+
+  const meta = document.createElement('div');
+  meta.className = 'saved-card__meta';
+  meta.appendChild(createCategoryTags(anime.categories));
+  meta.appendChild(createStatusSelect(anime));
+
+  card.appendChild(image);
+  card.appendChild(content);
+  card.appendChild(meta);
+
+  return card;
+}
+
+function renderSavedAnime() {
+  const savedAnime = window.AnimeStorage.getSavedAnime();
+  savedGrid.innerHTML = '';
+
+  if (!savedAnime.length) {
+    savedEmpty.hidden = false;
+    return;
+  }
+
+  savedEmpty.hidden = true;
+
+  savedAnime.forEach(anime => {
+    const card = createSavedCard(anime);
+    savedGrid.appendChild(card);
+  });
+}
+
+logoutBtn.addEventListener('click', () => {
   localStorage.removeItem('user');
   document.cookie = 'authorized=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
   window.location.href = 'login.html';
 });
 
-function renderSaved() {
-  const items = getSaved();
-  const grid = document.getElementById('saved-grid');
-  const empty = document.getElementById('saved-empty');
-
-  grid.innerHTML = '';
-
-  if (!items.length) {
-    empty.hidden = false;
-    return;
-  }
-
-  empty.hidden = true;
-
-  items.forEach(item => {
-    const card = document.createElement('article');
-    // build card content here
-
-    const removeBtn = document.createElement('button');
-    removeBtn.type = 'button';
-    removeBtn.textContent = 'Remove';
-    removeBtn.addEventListener('click', () => {
-      const updated = getSaved().filter(saved => saved.id !== item.id);
-      setSaved(updated);
-      renderSaved();
-    });
-
-    card.appendChild(removeBtn);
-    grid.appendChild(card);
-  });
-}
-
-renderSaved();
+updateHeader();
+renderSavedAnime();
