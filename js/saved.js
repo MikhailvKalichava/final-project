@@ -121,12 +121,23 @@ function createSavedCard(anime) {
   return card;
 }
 
+function showEmptyMessage(message) {
+  savedGrid.innerHTML = '';
+  savedEmpty.textContent = message;
+  savedEmpty.hidden = false;
+}
+
 function renderSavedAnime() {
+  if (!window.AnimeStorage.isUserLoggedIn()) {
+    showEmptyMessage('Please log in to view your saved anime.');
+    return;
+  }
+
   const savedAnime = window.AnimeStorage.getSavedAnime();
   savedGrid.innerHTML = '';
 
   if (!savedAnime.length) {
-    savedEmpty.hidden = false;
+    showEmptyMessage('No anime saved yet. Go to the Home page and press Save on any title.');
     return;
   }
 
@@ -140,6 +151,7 @@ function renderSavedAnime() {
 
 logoutBtn.addEventListener('click', () => {
   localStorage.removeItem('user');
+  localStorage.removeItem('userEmail');
   document.cookie = 'authorized=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
   window.location.href = 'login.html';
 });

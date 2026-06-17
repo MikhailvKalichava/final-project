@@ -1,4 +1,4 @@
-const SAVED_ANIME_KEY = 'savedAnime';
+const SAVED_ANIME_KEY_PREFIX = 'savedAnime:';
 
 async function fetchData(endpoint) {
   const response = await fetch(endpoint);
@@ -10,8 +10,33 @@ async function fetchData(endpoint) {
   return response.json();
 }
 
+function isUserLoggedIn() {
+  return Boolean(localStorage.getItem('user'));
+}
+
+function getCurrentAccountId() {
+  const currentUser = localStorage.getItem('user');
+
+  if (!currentUser) {
+    return null;
+  }
+
+  return localStorage.getItem('userEmail') || currentUser;
+}
+
+function getSavedAnimeKey() {
+  const accountId = getCurrentAccountId();
+  return accountId ? `${SAVED_ANIME_KEY_PREFIX}${accountId}` : null;
+}
+
 function getSavedAnime() {
-  const savedAnime = localStorage.getItem(SAVED_ANIME_KEY);
+  const savedAnimeKey = getSavedAnimeKey();
+
+  if (!savedAnimeKey) {
+    return [];
+  }
+
+  const savedAnime = localStorage.getItem(savedAnimeKey);
 
   if (!savedAnime) {
     return [];
@@ -26,7 +51,14 @@ function getSavedAnime() {
 }
 
 function setSavedAnime(animeList) {
-  localStorage.setItem(SAVED_ANIME_KEY, JSON.stringify(animeList));
+  const savedAnimeKey = getSavedAnimeKey();
+
+  if (!savedAnimeKey) {
+    return false;
+  }
+
+  localStorage.setItem(savedAnimeKey, JSON.stringify(animeList));
+  return true;
 }
 
 function isAnimeSaved(animeId) {
@@ -34,6 +66,10 @@ function isAnimeSaved(animeId) {
 }
 
 function saveAnime(anime) {
+  if (!isUserLoggedIn()) {
+    return false;
+  }
+
   const savedAnime = getSavedAnime();
 
   if (savedAnime.some(savedItem => savedItem.id === anime.id)) {
@@ -45,11 +81,14 @@ function saveAnime(anime) {
     status: anime.status || 'Plan to Watch'
   };
 
-  setSavedAnime([...savedAnime, animeWithStatus]);
-  return true;
+  return setSavedAnime([...savedAnime, animeWithStatus]);
 }
 
 function updateAnimeStatus(animeId, newStatus) {
+  if (!isUserLoggedIn()) {
+    return;
+  }
+
   const updatedAnime = getSavedAnime().map(anime => {
     if (anime.id === animeId) {
       return {
@@ -65,12 +104,18 @@ function updateAnimeStatus(animeId, newStatus) {
 }
 
 function removeAnime(animeId) {
+  if (!isUserLoggedIn()) {
+    return;
+  }
+
   const updatedAnime = getSavedAnime().filter(anime => anime.id !== animeId);
   setSavedAnime(updatedAnime);
 }
 
 window.AnimeStorage = {
   fetchData,
+  isUserLoggedIn,
+  getCurrentAccountId,
   getSavedAnime,
   setSavedAnime,
   isAnimeSaved,
