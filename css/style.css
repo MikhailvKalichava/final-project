@@ -314,11 +314,139 @@ button:disabled {
 
 
 
-/* ===== responsive ===== */
+@media (max-width: 900px) {
+  .site-nav {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .site-nav__links,
+  .site-nav__actions {
+    flex-wrap: wrap;
+  }
+
+  .anime-card {
+    grid-template-columns: 82px 1fr;
+  }
+
+  .anime-card__image {
+    width: 82px;
+    height: 110px;
+  }
+
+  .anime-card__meta {
+    grid-column: 2;
+    justify-items: start;
+  }
+
+  .anime-card__categories,
+  .saved-card__categories {
+    justify-content: flex-start;
+  }
+
+  .anime-card__message {
+    text-align: left;
+  }
+
+  .saved-grid {
+    max-width: 720px;
+  }
+
+  .saved-card {
+    grid-template-columns: 80px 1fr;
+  }
+
+  .saved-card__meta {
+    grid-column: 2;
+  }
+
+  .saved-card__remove-btn {
+    justify-self: start;
+  }
+}
+
 @media (max-width: 600px) {
-  /* mobile */
+  :root {
+    --spacing-page: 20px;
+    --spacing-card: 10px;
+  }
+
+  .site-nav {
+    flex-direction: column;
+  }
+
+  .site-nav__links,
+  .site-nav__actions {
+    width: 100%;
+  }
+
+  .site-nav__links {
+    justify-content: flex-start;
+  }
+
+  .home-main,
+  .saved-main,
+  .account-main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .home-intro h1,
+  .saved-intro h1,
+  .account-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .anime-card,
+  .saved-card {
+    grid-template-columns: 70px 1fr;
+    gap: 10px;
+  }
+
+  .anime-card__image,
+  .saved-card__image {
+    width: 70px;
+    height: 96px;
+  }
+
+  .anime-card__title,
+  .saved-card__title {
+    font-size: 1.1rem;
+  }
+
+  .anime-card__meta,
+  .saved-card__meta {
+    grid-column: 1 / -1;
+    justify-items: stretch;
+  }
+
+  .anime-card__categories,
+  .saved-card__categories {
+    justify-content: flex-start;
+  }
+
+  .anime-card__save-btn,
+  .saved-card__remove-btn,
+  .saved-card__status {
+    width: 100%;
+  }
+
+  .saved-card__remove-btn {
+    justify-self: stretch;
+  }
+
+  .account-form {
+    padding: 16px;
+  }
+
+  .account-form button {
+    width: 100%;
+  }
 }
 
 @media (min-width: 1024px) {
-  /* desktop */
+  .saved-grid {
+    max-width: 1000px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
