@@ -1,3 +1,10 @@
+import {
+  isUserLoggedIn,
+  getSavedAnime,
+  updateAnimeStatus,
+  removeAnime
+} from './api.js';
+
 const navUser = document.getElementById('nav-user');
 const loginLink = document.getElementById('login-link');
 const logoutBtn = document.getElementById('logout-btn');
@@ -56,7 +63,7 @@ function createStatusSelect(anime) {
   });
 
   select.addEventListener('change', () => {
-    window.AnimeStorage.updateAnimeStatus(anime.id, select.value);
+    updateAnimeStatus(anime.id, select.value);
   });
 
   label.appendChild(select);
@@ -70,7 +77,7 @@ function createRemoveButton(anime) {
   removeButton.textContent = 'Remove';
 
   removeButton.addEventListener('click', () => {
-    window.AnimeStorage.removeAnime(anime.id);
+    removeAnime(anime.id);
     renderSavedAnime();
   });
 
@@ -85,7 +92,7 @@ function createSavedCard(anime) {
   const image = document.createElement('img');
   image.className = 'saved-card__image';
   image.src = anime.image;
-  image.alt = `Placeholder image for ${anime.title}`;
+  image.alt = `Anime image for ${anime.title}`;
 
   const content = document.createElement('div');
   content.className = 'saved-card__content';
@@ -128,12 +135,12 @@ function showEmptyMessage(message) {
 }
 
 function renderSavedAnime() {
-  if (!window.AnimeStorage.isUserLoggedIn()) {
+  if (!isUserLoggedIn()) {
     showEmptyMessage('Please log in to view your saved anime.');
     return;
   }
 
-  const savedAnime = window.AnimeStorage.getSavedAnime();
+  const savedAnime = getSavedAnime();
   savedGrid.innerHTML = '';
 
   if (!savedAnime.length) {

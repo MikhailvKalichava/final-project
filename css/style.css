@@ -14,11 +14,20 @@
 }
 
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   background-color: var(--color-page-bg);
   color: var(--color-text);
   font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
 }
 
 
@@ -68,6 +77,7 @@ body {
 button,
 select,
 input {
+  max-width: 100%;
   border: 1px solid var(--color-card-border);
 }
 
@@ -81,7 +91,6 @@ button {
   background-color: var(--color-surface);
   color: var(--color-text);
 }
-
 
 button:disabled {
   cursor: default;
@@ -123,6 +132,11 @@ button:disabled {
   padding: var(--spacing-card);
   background-color: var(--color-card-bg);
   border: 1px solid var(--color-card-border);
+}
+
+.anime-card__content,
+.saved-card__content {
+  min-width: 0;
 }
 
 .anime-card__image {
@@ -179,8 +193,6 @@ button:disabled {
   padding: 4px 8px;
   color: var(--color-text);
 }
-
-
 
 
 .saved-empty {
@@ -311,9 +323,33 @@ button:disabled {
 
 
 
+.api-section {
+  margin-bottom: 32px;
+  text-align: center;
+}
 
+.api-section p {
+  color: var(--color-muted-text);
+}
 
+.api-results-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
 
+.state-message {
+  margin: 16px 0;
+  color: var(--color-muted-text);
+}
+
+.state-message--error {
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+/* ===== responsive ===== */
 @media (max-width: 900px) {
   .site-nav {
     flex-wrap: wrap;

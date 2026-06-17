@@ -1,6 +1,7 @@
-const SAVED_ANIME_KEY_PREFIX = 'savedAnime:';
+export const SAVED_ANIME_KEY_PREFIX = 'savedAnime:';
+export const TOP_ANIME_API_URL = 'https://api.jikan.moe/v4/top/anime?limit=6';
 
-async function fetchData(endpoint) {
+export async function fetchData(endpoint) {
   const response = await fetch(endpoint);
 
   if (!response.ok) {
@@ -10,11 +11,11 @@ async function fetchData(endpoint) {
   return response.json();
 }
 
-function isUserLoggedIn() {
+export function isUserLoggedIn() {
   return Boolean(localStorage.getItem('user'));
 }
 
-function getCurrentAccountId() {
+export function getCurrentAccountId() {
   const currentUser = localStorage.getItem('user');
 
   if (!currentUser) {
@@ -29,7 +30,7 @@ function getSavedAnimeKey() {
   return accountId ? `${SAVED_ANIME_KEY_PREFIX}${accountId}` : null;
 }
 
-function getSavedAnime() {
+export function getSavedAnime() {
   const savedAnimeKey = getSavedAnimeKey();
 
   if (!savedAnimeKey) {
@@ -50,7 +51,7 @@ function getSavedAnime() {
   }
 }
 
-function setSavedAnime(animeList) {
+export function setSavedAnime(animeList) {
   const savedAnimeKey = getSavedAnimeKey();
 
   if (!savedAnimeKey) {
@@ -61,11 +62,11 @@ function setSavedAnime(animeList) {
   return true;
 }
 
-function isAnimeSaved(animeId) {
+export function isAnimeSaved(animeId) {
   return getSavedAnime().some(anime => anime.id === animeId);
 }
 
-function saveAnime(anime) {
+export function saveAnime(anime) {
   if (!isUserLoggedIn()) {
     return false;
   }
@@ -84,7 +85,7 @@ function saveAnime(anime) {
   return setSavedAnime([...savedAnime, animeWithStatus]);
 }
 
-function updateAnimeStatus(animeId, newStatus) {
+export function updateAnimeStatus(animeId, newStatus) {
   if (!isUserLoggedIn()) {
     return;
   }
@@ -103,7 +104,7 @@ function updateAnimeStatus(animeId, newStatus) {
   setSavedAnime(updatedAnime);
 }
 
-function removeAnime(animeId) {
+export function removeAnime(animeId) {
   if (!isUserLoggedIn()) {
     return;
   }
@@ -111,15 +112,3 @@ function removeAnime(animeId) {
   const updatedAnime = getSavedAnime().filter(anime => anime.id !== animeId);
   setSavedAnime(updatedAnime);
 }
-
-window.AnimeStorage = {
-  fetchData,
-  isUserLoggedIn,
-  getCurrentAccountId,
-  getSavedAnime,
-  setSavedAnime,
-  isAnimeSaved,
-  saveAnime,
-  updateAnimeStatus,
-  removeAnime
-};
