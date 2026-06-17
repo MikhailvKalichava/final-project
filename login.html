@@ -3,25 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login — Project Name</title>
+  <title>Anime List — Account</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <main>
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main navigation">
+      <span class="site-nav__logo">Anime List</span>
 
-    <form id="login-form">
-      <!-- input type="text" with validation attributes -->
-      <label for="name-input">Your name</label>
-      <input id="name-input" type="text" name="name" required minlength="2" autocomplete="name">
+      <div class="site-nav__links">
+        <a href="index.html">Home</a>
+        <a href="saved.html">Saved Anime</a>
+        <a href="#">Test Page</a>
+      </div>
 
-      <p id="login-error" hidden></p>
+      <div class="site-nav__actions">
+        <a href="login.html" aria-current="page">Account</a>
+      </div>
+    </nav>
+  </header>
 
-      <button type="submit">Start →</button>
-    </form>
+  <main class="account-main">
+    <section class="account-section" aria-labelledby="account-title">
+      <h1 id="account-title">Account Settings</h1>
+      <p>Update your account information and save the changes.</p>
 
+      <form id="account-form" class="account-form">
+        <div class="account-form__row">
+          <label for="name-input">Account name</label>
+          <input id="name-input" type="text" name="name" required minlength="2" autocomplete="name">
+        </div>
+
+        <div class="account-form__row">
+          <label for="email-input">Account email</label>
+          <input id="email-input" type="email" name="email" required autocomplete="email">
+        </div>
+
+        <div class="account-form__row">
+          <label for="photo-input">Account photo</label>
+          <input id="photo-input" type="url" name="photo" placeholder="Image URL">
+        </div>
+
+        <div class="account-form__row">
+          <label for="joined-input">Date joined</label>
+          <input id="joined-input" type="date" name="joinedDate">
+        </div>
+
+        <p id="account-message" hidden></p>
+
+        <button type="submit">Save Changes</button>
+      </form>
+    </section>
   </main>
 
-  <script type="module" src="js/login.js"></script>
+  <script src="js/login.js"></script>
 </body>
 </html>
