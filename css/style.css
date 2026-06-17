@@ -1,35 +1,452 @@
-/* ===== custom properties ===== */
+
 :root {
-  /* colour palette and spacing variables */
+  --color-page-bg: #1f1f1f;
+  --color-surface: #2a2a2a;
+  --color-card-bg: #262626;
+  --color-card-border: #6f6f6f;
+  --color-text: #f2f2f2;
+  --color-muted-text: #c7c7c7;
+  --color-link: #ffffff;
+  --color-input-bg: #333333;
+  --color-focus-border: #b5b5b5;
+  --spacing-page: 32px;
+  --spacing-card: 12px;
 }
 
-/* ===== reset ===== */
 
-/* ===== header ===== */
+body {
+  margin: 0;
+  background-color: var(--color-page-bg);
+  color: var(--color-text);
+  font-family: Arial, sans-serif;
+}
 
-/* ===== nav — use Flexbox here ===== */
 
-/* ===== login page ===== */
 
-/* ===== main ===== */
+.site-header,
+.site-footer {
+  background-color: var(--color-surface);
+}
 
-/* ===== form ===== */
+.site-footer {
+  padding: 16px;
+  text-align: center;
+  color: var(--color-muted-text);
+}
 
-/* ===== results grid — use CSS Grid here ===== */
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+}
 
-/* ===== card ===== */
+.site-nav__logo {
+  font-weight: bold;
+}
 
-/* ===== saved grid — use CSS Grid here ===== */
+.site-nav__links,
+.site-nav__actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
 
-/* ===== loading & error states ===== */
+.site-nav a {
+  color: var(--color-link);
+  text-decoration: none;
+}
 
-/* ===== footer ===== */
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  text-decoration: underline;
+}
 
-/* ===== responsive ===== */
+
+
+button,
+select,
+input {
+  border: 1px solid var(--color-card-border);
+}
+
+button,
+select {
+  cursor: pointer;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+
+button:disabled {
+  cursor: default;
+  opacity: 0.65;
+}
+
+.home-main,
+.saved-main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--spacing-page) 16px;
+}
+
+.home-intro,
+.anime-section h2,
+.saved-intro,
+.saved-section h2 {
+  text-align: center;
+}
+
+.home-intro p,
+.saved-intro p {
+  color: var(--color-muted-text);
+}
+
+
+
+.anime-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.anime-card {
+  display: grid;
+  grid-template-columns: 90px 1fr 180px;
+  gap: 12px;
+  align-items: start;
+  padding: var(--spacing-card);
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+}
+
+.anime-card__image {
+  width: 90px;
+  height: 120px;
+  object-fit: cover;
+}
+
+.anime-card__title {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.anime-card__description summary,
+.saved-card__description summary {
+  cursor: pointer;
+  color: var(--color-muted-text);
+}
+
+.anime-card__description p,
+.saved-card__description p {
+  margin-bottom: 0;
+  color: var(--color-muted-text);
+}
+
+.anime-card__meta {
+  display: grid;
+  gap: 12px;
+  justify-items: end;
+
+}
+
+.anime-card__categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.anime-card__save-btn {
+  width: fit-content;
+}
+
+.anime-card__message {
+  margin: 0;
+  color: var(--color-muted-text);
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.anime-card__categories span,
+.saved-card__categories span {
+  border: 1px solid var(--color-card-border);
+  padding: 4px 8px;
+  color: var(--color-text);
+}
+
+
+
+
+.saved-empty {
+  text-align: center;
+  color: var(--color-muted-text);
+}
+
+.saved-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.saved-card {
+  display: grid;
+  grid-template-columns: 80px 1fr 160px;
+  gap: 12px;
+  align-items: start;
+  padding: var(--spacing-card);
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+}
+
+.saved-card__image {
+  width: 80px;
+  height: 110px;
+  object-fit: cover;
+}
+
+.saved-card__title {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.saved-card__meta {
+  display: grid;
+  gap: 12px;
+}
+
+.saved-card__categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.saved-card__status-label {
+  display: grid;
+  gap: 6px;
+  color: var(--color-muted-text);
+}
+
+.saved-card__status {
+  padding: 6px;
+  background-color: var(--color-input-bg);
+  color: var(--color-text);
+}
+
+
+
+
+
+
+.account-main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: var(--spacing-page) 16px;
+}
+
+.account-section {
+  text-align: center;
+}
+
+.account-section p {
+  color: var(--color-muted-text);
+}
+
+.account-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+  text-align: left;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  padding: 20px;
+}
+
+.account-form__row {
+  display: grid;
+  gap: 6px;
+}
+
+.account-form__row label {
+  color: var(--color-muted-text);
+}
+
+.account-form__row input {
+  padding: 8px;
+  background-color: var(--color-input-bg);
+  color: var(--color-text);
+}
+
+.account-form__row input:focus,
+.saved-card__status:focus,
+.anime-card__save-btn:focus {
+  outline: none;
+  border-color: var(--color-focus-border);
+}
+
+.account-form__message {
+  margin: 0;
+}
+
+.account-form__message--error {
+  font-weight: bold;
+}
+
+.saved-card__remove-btn {
+  width: fit-content;
+  justify-self: end;
+}
+
+.saved-card__remove-btn:hover {
+  border-color: var(--color-focus-border);
+}
+
+
+
+
+
+
+@media (max-width: 900px) {
+  .site-nav {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .site-nav__links,
+  .site-nav__actions {
+    flex-wrap: wrap;
+  }
+
+  .anime-card {
+    grid-template-columns: 82px 1fr;
+  }
+
+  .anime-card__image {
+    width: 82px;
+    height: 110px;
+  }
+
+  .anime-card__meta {
+    grid-column: 2;
+    justify-items: start;
+  }
+
+  .anime-card__categories,
+  .saved-card__categories {
+    justify-content: flex-start;
+  }
+
+  .anime-card__message {
+    text-align: left;
+  }
+
+  .saved-grid {
+    max-width: 720px;
+  }
+
+  .saved-card {
+    grid-template-columns: 80px 1fr;
+  }
+
+  .saved-card__meta {
+    grid-column: 2;
+  }
+
+  .saved-card__remove-btn {
+    justify-self: start;
+  }
+}
+
 @media (max-width: 600px) {
-  /* mobile */
+  :root {
+    --spacing-page: 20px;
+    --spacing-card: 10px;
+  }
+
+  .site-nav {
+    flex-direction: column;
+  }
+
+  .site-nav__links,
+  .site-nav__actions {
+    width: 100%;
+  }
+
+  .site-nav__links {
+    justify-content: flex-start;
+  }
+
+  .home-main,
+  .saved-main,
+  .account-main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .home-intro h1,
+  .saved-intro h1,
+  .account-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .anime-card,
+  .saved-card {
+    grid-template-columns: 70px 1fr;
+    gap: 10px;
+  }
+
+  .anime-card__image,
+  .saved-card__image {
+    width: 70px;
+    height: 96px;
+  }
+
+  .anime-card__title,
+  .saved-card__title {
+    font-size: 1.1rem;
+  }
+
+  .anime-card__meta,
+  .saved-card__meta {
+    grid-column: 1 / -1;
+    justify-items: stretch;
+  }
+
+  .anime-card__categories,
+  .saved-card__categories {
+    justify-content: flex-start;
+  }
+
+  .anime-card__save-btn,
+  .saved-card__remove-btn,
+  .saved-card__status {
+    width: 100%;
+  }
+
+  .saved-card__remove-btn {
+    justify-self: stretch;
+  }
+
+  .account-form {
+    padding: 16px;
+  }
+
+  .account-form button {
+    width: 100%;
+  }
 }
 
 @media (min-width: 1024px) {
-  /* desktop */
+  .saved-grid {
+    max-width: 1000px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
