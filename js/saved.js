@@ -1,3 +1,4 @@
+import { initThemeSwitcher } from './theme.js';
 import {
   isUserLoggedIn,
   getSavedAnime,
@@ -163,5 +164,6 @@ logoutBtn.addEventListener('click', () => {
   window.location.href = 'login.html';
 });
 
+initThemeSwitcher();
 updateHeader();
 renderSavedAnime();

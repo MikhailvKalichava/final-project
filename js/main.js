@@ -1,3 +1,4 @@
+import { initThemeSwitcher } from './theme.js';
 import {
   TOP_ANIME_API_URL,
   fetchData,
@@ -234,6 +235,7 @@ logoutBtn.addEventListener('click', () => {
   window.location.href = 'login.html';
 });
 
+initThemeSwitcher();
 updateHeader();
 updateStaticSaveButtonStates();
 handleStaticSaveButtons();

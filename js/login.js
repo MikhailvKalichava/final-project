@@ -1,3 +1,5 @@
+import { initThemeSwitcher } from './theme.js';
+
 const accountForm = document.getElementById('account-form');
 const nameInput = document.getElementById('name-input');
 const emailInput = document.getElementById('email-input');
@@ -37,6 +39,7 @@ function saveProfile(profile) {
   document.cookie = 'authorized=true; path=/';
 }
 
+initThemeSwitcher();
 fillProfileForm(getProfile());
 
 accountForm.addEventListener('submit', (e) => {
