@@ -3,37 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saved — Project Name</title>
+  <title>Anime List — Saved Anime</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <header>
-    <nav>
-      <span class="nav__logo">Project Name</span>
-      <div class="nav__links">
-        <a href="index.html">Search</a>
-        <a href="saved.html">Saved</a>
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main navigation">
+      <span class="site-nav__logo">Anime List</span>
+
+      <div class="site-nav__links">
+        <a href="index.html">Home</a>
+        <a href="saved.html" aria-current="page">Saved Anime</a>
       </div>
-      <div class="nav__actions">
+
+      <div class="site-nav__actions">
+        <label class="theme-control" for="theme-select">
+          <span>Theme</span>
+          <select id="theme-select" name="theme">
+            <option value="dark">Dark</option>
+            <option value="rose">Red Rose</option>
+          </select>
+        </label>
         <span id="nav-user"></span>
-        <button id="logout-btn" type="button">Logout</button>
+        <a href="login.html" id="login-link">Account</a>
+        <button id="logout-btn" type="button" hidden>Logout</button>
       </div>
     </nav>
   </header>
 
-  <main>
-
-    <section>
-      <h2>Saved Items</h2>
-      <p id="saved-empty" hidden>Nothing saved yet.</p>
-      <div id="saved-grid"></div>
+  <main class="saved-main">
+    <section class="saved-intro" aria-labelledby="saved-title">
+      <h1 id="saved-title">Saved Anime</h1>
+      <p>Manage the anime titles saved in your account and update your personal watch status.</p>
     </section>
 
+    <section class="saved-section" aria-labelledby="saved-list-title">
+      <h2 id="saved-list-title">My List</h2>
+      <p id="saved-empty" class="saved-empty" hidden>No anime saved yet. Go to the Home page and press Save on any title.</p>
+      <div id="saved-grid" class="saved-grid"></div>
+    </section>
   </main>
 
-  <footer>
-    <!-- footer content -->
+  <footer class="site-footer">
+    <p>Anime List project</p>
   </footer>
 
   <script type="module" src="js/saved.js"></script>
